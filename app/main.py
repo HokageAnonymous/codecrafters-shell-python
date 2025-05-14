@@ -10,9 +10,11 @@ def main():
     if command == "exit 0":
         sys.exit(0)
     elif command.startswith("type "):
-        cmd = command[5:].strip()
-        if cmd in ("echo", "type","exit"):
-            print(f"{cmd} is a shell builtin")
+        type_command = command.replace("type ", "")
+        if type_command in ("echo", "exit", "type"):
+            print(f"{type_command} is a shell builtin")
+        else:
+            print(f"{type_command}: not found")
 
     elif command.startswith("echo "):
         print(command[5:])
