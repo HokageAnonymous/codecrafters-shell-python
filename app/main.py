@@ -9,6 +9,12 @@ def main():
     command = input().strip()
     if command == "exit 0":
         sys.exit(0)
+    elif command.startswith("type "):
+        if command[5:] == "echo" or "type":
+            print(command[5:] + "is a shell builtin")
+        else:
+            print(f"{command}: not found")
+
     elif command.startswith("echo "):
         print(command[5:])
     else:
