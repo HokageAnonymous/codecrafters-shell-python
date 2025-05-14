@@ -10,7 +10,7 @@ def main():
     if command == "exit 0":
         return exit(0)
     print(f"{command}: command not found")
-    main()
+    
 
 
 if __name__ == "__main__":
