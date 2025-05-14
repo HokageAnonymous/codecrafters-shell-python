@@ -6,7 +6,7 @@ def main():
     sys.stdout.flush()  # Ensure the prompt is displayed immediately
 
     # Wait for user input
-    command = input()
+    command = input().strip()
     if command == "exit 0":
         sys.exit(0)
     elif command.startswith("echo "):
