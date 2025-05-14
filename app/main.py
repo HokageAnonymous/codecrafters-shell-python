@@ -14,7 +14,12 @@ def main():
         if type_command in ("echo", "exit", "type"):
             print(f"{type_command} is a shell builtin")
         else:
-            print(f"{type_command}: not found")
+        
+            path = shutil.which(type_command)
+            if path:
+                print(f"{type_command} is {path}")
+            else:
+                print(f"{type_command}: not found")
 
     elif command.startswith("echo "):
         print(command[5:])
