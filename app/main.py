@@ -11,7 +11,7 @@ def main():
         sys.exit(0)
     elif command.startswith("type "):
         if command[5:] == "echo" or "type":
-            print(command[5:] + "is a shell builtin")
+            print(command[5:] + " is a shell builtin")
         else:
             print(f"{command}: not found")
 
