@@ -12,8 +12,7 @@ def main():
     elif command.startswith("echo "):
         print(command[5:])
     else:
-    print(f"{command}: command not found")
-
+        print(f"{command}: command not found")
     main()
 
 if __name__ == "__main__":
