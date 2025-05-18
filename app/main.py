@@ -15,6 +15,22 @@ def main():
         main()
         return
 
+        # Check for output redirection
+    if '>' in command:
+        # Split the command and the output file
+        parts = command.split('>')
+        cmd_part = parts[0].strip()
+        output_file = parts[1].strip()
+
+        # Handle the command execution with output redirection
+        try:
+            with open(output_file, 'w') as f:
+                subprocess.run(cmd_part, shell=True, stdout=f, stderr=subprocess.PIPE, text=True)
+        except Exception as e:
+            print(f"Error: {e}")
+        main()
+        return
+
     if splitCommand[0] == "exit" and len(splitCommand) > 1 and splitCommand[1] == "0":
         sys.exit(0)
     elif splitCommand[0] == "type":
