@@ -9,30 +9,35 @@ def main():
 
     # Wait for user input
     command = input().strip()
-    splitCommand = command.strip()
-    if command == "exit 0":
-        sys.exit(0)
-    elif command.startswith("type "):
-        type_command = command.replace("type ", "")
-        if type_command in ("echo", "exit", "type"):
-            print(f"{type_command} is a shell builtin")
-        else:
+    splitCommand = command.split()  # Split the command into a list
 
-            path = shutil.which(type_command)
-            if path:
-                print(f"{type_command} is {path}")
+    if not splitCommand:
+        main()
+        return
+
+    if splitCommand[0] == "exit" and len(splitCommand) > 1 and splitCommand[1] == "0":
+        sys.exit(0)
+    elif splitCommand[0] == "type":
+        if len(splitCommand) > 1:
+            type_command = splitCommand[1]
+            if type_command in ("echo", "exit", "type"):
+                print(f"{type_command} is a shell builtin")
             else:
-                print(f"{type_command}: not found")
+                path = shutil.which(type_command)
+                if path:
+                    print(f"{type_command} is {path}")
+                else:
+                    print(f"{type_command}: not found")
+        else:
+            print("Usage: type <command>")
+    elif splitCommand[0] == "echo":
+        print(" ".join(splitCommand[1:]))
     elif shutil.which(splitCommand[0]) is not None:
         os.system(command)
-
-    elif command.startswith("echo "):
-        print(command[5:])
     else:
-        print(f"{command}: command not found")
+        print(f"{splitCommand[0]}: command not found")
     main()
 
 if __name__ == "__main__":
     main()
-
 
