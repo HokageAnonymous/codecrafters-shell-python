@@ -1,6 +1,7 @@
 import sys
 import shutil
 import os
+import subprocess
 
 def main():
     # Print the prompt
@@ -9,13 +10,12 @@ def main():
 
     # Wait for user input
     command = input().strip()
-    splitCommand = command.split()  # Split the command into a list
 
-    if not splitCommand:
+    if not command:
         main()
         return
 
-        # Check for output redirection
+    # Check for output redirection
     if '>' in command:
         # Split the command and the output file
         parts = command.split('>')
@@ -30,6 +30,8 @@ def main():
             print(f"Error: {e}")
         main()
         return
+
+    splitCommand = command.split()
 
     if splitCommand[0] == "exit" and len(splitCommand) > 1 and splitCommand[1] == "0":
         sys.exit(0)
@@ -48,20 +50,19 @@ def main():
             print("Usage: type <command>")
     elif splitCommand[0] == "echo":
         print(" ".join(splitCommand[1:]))
-    elif shutil.which(splitCommand[0]) is not None:
-        os.system(command)
+    elif splitCommand[0] == "pwd":
+        print(os.getcwd())
     elif splitCommand[0] == "cd":
         if len(splitCommand) > 1:
-            path = os.path.expanduser(splitCommand[1])
+            path = os.path.expanduser(splitCommand[1])  # Expand ~ to home directory
             try:
                 os.chdir(path)
             except FileNotFoundError:
                 print(f"cd: {splitCommand[1]}: No such file or directory")
         else:
             print("cd: missing operand")
-    elif splitCommand[0] == "pwd":
-        print(os.getcwd())
-
+    elif shutil.which(splitCommand[0]) is not None:
+        os.system(command)
     else:
         print(f"{splitCommand[0]}: command not found")
     main()
