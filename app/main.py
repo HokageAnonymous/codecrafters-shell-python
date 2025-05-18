@@ -9,7 +9,7 @@ def main():
 
     # Wait for user input
     command = input().strip()
-    splitCommand = command
+    splitCommand = command.strip()
     if command == "exit 0":
         sys.exit(0)
     elif command.startswith("type "):
