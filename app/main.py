@@ -1,5 +1,6 @@
 import sys
 import shutil
+import os 
 
 def main():
     # Print the prompt
@@ -21,6 +22,8 @@ def main():
                 print(f"{type_command} is {path}")
             else:
                 print(f"{type_command}: not found")
+    elif shutil.which(splitCommand[0]) != None:
+        os.system(f"{splitCommand[0]}{' '.join(splitCommand[1:]}")
 
     elif command.startswith("echo "):
         print(command[5:])
