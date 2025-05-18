@@ -1,6 +1,6 @@
 import sys
 import shutil
-import os 
+import os
 
 def main():
     # Print the prompt
@@ -17,7 +17,7 @@ def main():
         if type_command in ("echo", "exit", "type"):
             print(f"{type_command} is a shell builtin")
         else:
-        
+
             path = shutil.which(type_command)
             if path:
                 print(f"{type_command} is {path}")
@@ -34,4 +34,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
