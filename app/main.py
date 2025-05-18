@@ -34,6 +34,9 @@ def main():
         print(" ".join(splitCommand[1:]))
     elif shutil.which(splitCommand[0]) is not None:
         os.system(command)
+    elif splitCommand[0] == "pwd":
+        print(os.getcwd())
+
     else:
         print(f"{splitCommand[0]}: command not found")
     main()
