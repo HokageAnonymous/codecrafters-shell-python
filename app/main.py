@@ -20,7 +20,7 @@ def main():
     elif splitCommand[0] == "type":
         if len(splitCommand) > 1:
             type_command = splitCommand[1]
-            if type_command in ("echo", "exit", "type"):
+            if type_command in ("echo", "exit", "type", "pwd"):
                 print(f"{type_command} is a shell builtin")
             else:
                 path = shutil.which(type_command)
