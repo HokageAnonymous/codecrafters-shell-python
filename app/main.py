@@ -34,6 +34,15 @@ def main():
         print(" ".join(splitCommand[1:]))
     elif shutil.which(splitCommand[0]) is not None:
         os.system(command)
+    elif splitCommand[0] == "cd":
+        if len(splitCommand) > 1:
+            path = splitCommand[1]
+            try:
+                os.chdir(path)
+            except FileNotFoundError:
+                print(f"cd: {path}: No such file or directory")
+        else:
+            print("cd: missing operand")
     elif splitCommand[0] == "pwd":
         print(os.getcwd())
 
