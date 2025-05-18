@@ -20,7 +20,7 @@ def main():
     elif splitCommand[0] == "type":
         if len(splitCommand) > 1:
             type_command = splitCommand[1]
-            if type_command in ("echo", "exit", "type", "pwd"):
+            if type_command in ("echo", "exit", "type", "pwd", "cd"):
                 print(f"{type_command} is a shell builtin")
             else:
                 path = shutil.which(type_command)
@@ -36,11 +36,11 @@ def main():
         os.system(command)
     elif splitCommand[0] == "cd":
         if len(splitCommand) > 1:
-            path = splitCommand[1]
+            path = os.path.expanduser(splitCommand[1])
             try:
                 os.chdir(path)
             except FileNotFoundError:
-                print(f"cd: {path}: No such file or directory")
+                print(f"cd: {splitCommand[1]}: No such file or directory")
         else:
             print("cd: missing operand")
     elif splitCommand[0] == "pwd":
